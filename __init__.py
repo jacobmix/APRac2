@@ -1,6 +1,10 @@
 from typing import Dict, Optional, Mapping, Any
 import typing
 import os
+import json
+import zipfile
+from importlib.resources import files
+from pathlib import Path
 
 from worlds.LauncherComponents import Component, SuffixIdentifier, Type, components, launch_subprocess
 import settings
@@ -16,10 +20,18 @@ from .Container import Rac2ProcedurePatch, generate_patch
 from .Rac2Options import Rac2Options
 
 
-WORLD_VERSION = (0, 6, 4, 4)  # update manually before release
-
 def get_world_version():
-    return WORLD_VERSION
+    try:
+        data = json.loads(
+            files(__package__).joinpath("archipelago.json").read_text(encoding="utf-8") # Make sure archipelago.json has the right "world_version", and is inside the "rac2" folder.
+        )
+
+        version = data.get("world_version", "0.0.0")
+        return tuple(int(x) for x in version.split("."))
+
+    except Exception as e:
+        print(f"Failed to load world version: {e}")
+        return (0, 0, 0)
 
 def run_client(_url: Optional[str] = None):
     from .Rac2Client import launch
