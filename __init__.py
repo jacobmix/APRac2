@@ -189,7 +189,6 @@ class Rac2World(World):
 
     def get_options_as_dict(self) -> Dict[str, Any]:
         return self.options.as_dict(
-            "start_inventory_from_pool",
             "death_link",
             "starting_weapons",
             "randomize_megacorp_vendor",
