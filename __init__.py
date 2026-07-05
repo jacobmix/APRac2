@@ -100,9 +100,8 @@ class Rac2World(World):
 
     def generate_early(self) -> None:
         # implement .yaml-less Universal Tracker support
-        if hasattr(self.multiworld, "generation_is_fake"):
+        if getattr(self.multiworld, "generation_is_fake", False):
             if hasattr(self.multiworld, "re_gen_passthrough"):
-                # I'm doing getattr purely so pylance stops being mad at me
                 re_gen_passthrough = getattr(self.multiworld, "re_gen_passthrough")
 
                 if "Ratchet & Clank 2" in re_gen_passthrough:
