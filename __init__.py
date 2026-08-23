@@ -118,7 +118,6 @@ class Rac2World(World):
 
                 if "Ratchet & Clank 2" in re_gen_passthrough:
                     slot_data = re_gen_passthrough["Ratchet & Clank 2"]
-                    self.options.start_inventory_from_pool.value = slot_data["start_inventory_from_pool"]
                     self.options.death_link.value = slot_data["death_link"]
                     self.options.starting_weapons.value = slot_data["starting_weapons"]
                     self.options.randomize_megacorp_vendor.value = slot_data["randomize_megacorp_vendor"]
